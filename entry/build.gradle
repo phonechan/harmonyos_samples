@@ -1,0 +1,26 @@
+apply plugin: 'com.huawei.ohos.hap'
+ohos {
+
+    signingConfigs {
+        debug {
+            storeFile file('/Users/chenfeng/Documents/key/testkey.p12')
+            storePassword '0000001BA32B7549B14E126FC33B61810E16D45416A06BB765A2D96F505E8546EAD9BB089AFC650B2E466E'
+            keyAlias 'chenfeng123'
+            keyPassword '0000001B5E44956601E38AD544AA1D5389A283997A5788E0AFEBC162EAEBC4EFE978C45854F24CB3DFB44D'
+            signAlg 'SHA256withECDSA'
+            profile file('/Users/chenfeng/Documents/key/testkey.p7b')
+            certpath file('/Users/chenfeng/Documents/key/testkey.cer')
+        }
+    }
+
+    compileSdkVersion 4
+    defaultConfig {
+        compatibleSdkVersion 4
+    }
+    
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.har'])
+    testCompile'junit:junit:4.12'
+}

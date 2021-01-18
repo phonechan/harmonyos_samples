@@ -43,6 +43,15 @@
         "label": "harmonyos_samples",
         "type": "page",
         "launchType": "standard"
+      },
+      {
+        "orientation": "unspecified",
+        "name": "com.cardinfolink.ss.client.ComponentsAbility",
+        "icon": "$media:icon",
+        "description": "$string:componentsability_description",
+        "label": "entry",
+        "type": "page",
+        "launchType": "standard"
       }
     ]
   }

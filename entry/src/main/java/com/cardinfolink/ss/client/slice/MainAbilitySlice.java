@@ -5,6 +5,7 @@ import com.cardinfolink.ss.client.model.ItemMain;
 import com.cardinfolink.ss.client.provider.MainItemProvider;
 import ohos.aafwk.ability.AbilitySlice;
 import ohos.aafwk.content.Intent;
+import ohos.aafwk.content.Operation;
 import ohos.agp.components.Component;
 import ohos.agp.components.ListContainer;
 import ohos.agp.utils.LayoutAlignment;
@@ -71,11 +72,34 @@ public class MainAbilitySlice extends AbilitySlice {
             @Override
             public void onItemClicked(ListContainer listContainer, Component component, int i, long l) {
                 ItemMain item = (ItemMain) listContainer.getItemProvider().getItem(i);
-                new ToastDialog(getContext())
-                        .setText("clicked:" + item.getName())
-                        // Toast显示在界面中间
-                        .setAlignment(LayoutAlignment.CENTER)
-                        .show();
+                String abilityName = null;
+                switch (item.getName()) {
+                    case "Ability":
+                        break;
+                    case "UI":
+                        abilityName = "com.cardinfolink.ss.client.ComponentsAbility";
+                        break;
+                    default:
+                        abilityName = null;
+                }
+                if (abilityName == null) {
+                    new ToastDialog(getContext())
+                            .setText(item.getName() + " 模块正在开发中...")
+                            // Toast显示在界面中间
+                            .setAlignment(LayoutAlignment.CENTER)
+                            .show();
+                    return;
+                }
+                Intent intent = new Intent();
+                // 指定待启动FA的bundleName和abilityName
+                Operation operation = new Intent.OperationBuilder()
+                        .withDeviceId("")
+                        .withBundleName("com.cardinfolink.ss.client")
+                        .withAbilityName(abilityName)
+                        .build();
+                intent.setOperation(operation);
+                // 通过AbilitySlice的startAbility接口实现启动另一个页面
+                startAbility(intent);
             }
         });
     }
